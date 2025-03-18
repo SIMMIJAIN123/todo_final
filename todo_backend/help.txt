@@ -1,0 +1,105 @@
+1. Create a Django project
+django-admin startproject todo_backend
+
+2. set up virtual env
+python3 -m venv venv
+
+3. Activate venv
+source venv/bin/activate
+
+4. Install dependencies
+    a) pip install django : - Djnago used to buikd web applications.nedded to used to crete backend.
+    b) pip install djangorestframework : - building rest api in django. It provide tools to create API ENDPOINTS , HANDLE authentication ,and work with JSON responses.
+    c) pip install psycopg2-binary : - PostgreSQL adapter for python , which allows django to interact with a PostgresSQL database.
+
+pip install django djangorestframework psycopg2-binary
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todo_db',
+        'USER': 'your_db_user',
+        'PASSWORD': 'your_db_password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+
+cmd : psql postgres
+psql (14.15 (Homebrew))
+Type "help" for help.
+
+postgres=# CREATE DATABASE todo_db;
+CREATE DATABASE
+postgres=# CREATE USER jain WITH PASSWORD 'simmi@123';
+CREATE ROLE
+postgres=# \q
+
+
+
+Create Djnago APPS:
+In todo_backend dir
+python manage.py startapp users
+python manage.py startapp todos
+
+
+
+
+
+
+FOR fronted:
+install node.js and npm
+
+brew install node
+
+
+create a REACT app :  npm create vite@latest todo_frontend --template react
+ cd todo_frontend
+
+ install dependencies : 
+ npm install
+ npm install axios :- required for api communication
+
+
+ start the Development server: npm run dev
+
+
+4.To connect the React frontend (Vite) with the Django backend, you need to configure CORS (Cross-Origin Resource Sharing) 
+   pip install django-cors-headers
+
+
+dd 'corsheaders' to INSTALLED_APPS in settings.py.
+3️⃣ Add 'corsheaders.middleware.CorsMiddleware' to MIDDLEWARE.
+4️⃣ Allow all origins using CORS_ALLOW_ALL_ORIGINS = True.
+5️⃣ (Optional) Restrict CORS to specific domains using CORS_ALLOWED_ORIGINS.
+6️⃣ Restart the Django server: python manage.py runserver.
+
+pip install django djangorestframework django-cors-headers djangorestframework-simplejwt psycopg2-binary
+
+
+Why?
+Django → Provides the web framework.
+Django REST Framework (DRF) → Helps us create RESTful APIs.
+django-cors-headers → Allows frontend (React) to make requests to the backend (Django).
+djangorestframework-simplejwt → Handles JWT-based authentication (login/logout).
+psycopg2-binary → Allows Django to interact with PostgreSQL.
+
+
+Why?
+CORS Middleware allows React (frontend) to talk to Django (backend).
+By default, Django blocks requests from different origins (domains).
+CORS_ALLOW_ALL_ORIGINS = True allows all frontend requests (for development).
+
+
+
+
+serializers.ModelSerializer → Converts User objects to JSON.
+fields = ['id', 'username', 'email', 'password'] → Specifies which fields should be included.
+extra_kwargs = {'password': {'write_only': True}} → Ensures passwords aren't returned in API responses.
+def create(self, validated_data): → Ensures passwords are hashed before saving
+
+
+python manage.py createsuperuser
+
+npm install axios react-router-dom
